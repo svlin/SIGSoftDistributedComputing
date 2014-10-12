@@ -1,42 +1,76 @@
-package com.company;
+package com.uiuc.sigsoft.nettest;
 
 /**
- * Created by sophialin on 10/11/14.
+ * Created by Pri on 10/11/2014.
  */
-import java.util.Scanner;
+public class MonteCarlo {
 
-public class MonteCarlo
-{
-    public static void main (String args [])
+    long totalRuns;
+    long hits;
+    long timesRun;
+    long r;
+    public MonteCarlo(int runs)
     {
-        Scanner scan = new Scanner (System.in);
+        totalRuns = runs;
+        hits = 0;
+        timesRun = 0;
+        r = 1;
+    }
 
-        System.out.println("How many times would you like to run the program?");
-        int runs = scan.nextInt();
-        int hit = 0;
-        int miss = 0;
-
-        for(int i= 0; i < runs; i++)
+    public void runAll()
+    {
+        while(timesRun < totalRuns)
         {
-            double randX = (Math.random() * 2) - 1;
-            double randY = (Math.random() * 2) - 1;
-            double dist = Math.sqrt(randX * randX + randY * randY);
+            double random_x = Math.random()*(r * 2);
+            double random_y = Math.random()*(r * 2);
 
-            if (dist < 1)
+            if ((Math.pow((random_x - r), 2) + Math.pow((random_y - r), 2)) <= Math.pow(r, 2))
             {
-                hit++;
+                hits++;
             }
-            else
+            timesRun++;
+        }
+    }
+
+    public void runTimes(int times)
+    {
+        long timesToRun = timesRun + times;
+        while(timesRun < timesToRun)
+        {
+            double random_x = Math.random()*(r * 2);
+            double random_y = Math.random()*(r * 2);
+
+            if ((Math.pow((random_x - r), 2) + Math.pow((random_y - r), 2)) <= Math.pow(r, 2))
             {
-                miss++;
+                hits++;
+            }
+            timesRun++;
+        }
+    }
+
+    public long getHits()
+    {
+        return hits;
+    }
+
+    /*double count = 0;
+
+        for (int i = 0; i < runs; i++)
+        {
+            double random_x = Math.random()*(r * 2);
+            double random_y = Math.random()*(r * 2);
+
+            if ((Math.pow((random_x - r), 2) + Math.pow((random_y - r), 2)) <= Math.pow(r, 2))
+            {
+                count++;
             }
         }
 
-        double approx_pi = (double) (4.0 * hit / runs);
+        System.out.println("Count " + count);
 
-        System.out.println("Number of hits:" + hit);
-        System.out.println("Number of misses:" + miss);
+        double pi = 4 * (count / runs);
 
-        System.out.println(approx_pi);
-    }
+        System.out.println("The approximation of pi = " + pi);*/
+
+
 }

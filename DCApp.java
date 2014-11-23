@@ -65,7 +65,7 @@ public class DCApp implements ActionListener {
                 System.out.println(hits);
                 
                 Connection connection = new Connection("http://tensile-tenure-727.appspot.com/totals");
-                connection.post(sim.getHits(), Integer.parseInt(str.trim()));
+                connection.post(hits, Integer.parseInt(str.trim()));
             } else {
                 JOptionPane.showMessageDialog(null, "Please only insert a positive integer for the number of runs.");
                 System.out.println("User did not insert a valid value for the number of runs.");
